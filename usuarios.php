@@ -5,22 +5,113 @@
 <!-- CAPTURANDO DADOS DO JSON -->
 <?php
     
+    // ESTAMOS PUXANDO O CONTEÚDO DO ARQUIVO DECLARADO COMO PARÂMETRO
     $usuariosJson = file_get_contents("./data/usuarios.json");
     // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O JSON DA MANEIRA QUE RECEBEMOS
     // echo "<br><pre>";
     // var_dump($usuariosJson);
     // echo "</pre><br>";
+    // exit;
     // Perecba que o JSON nada mais é do que uma String. =)
 
-    $usuariosObjetos = json_decode($usuariosJson);
+    // AQUI TRANSFORMAMOS A STRING RECEBIDA EM OBJETO
+    $usuariosObjeto = json_decode($usuariosJson);
     // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O JSON DECODIFICADO
     // echo "<br><pre>";
-    // var_dump($usuariosObjetos);
+    // var_dump($usuariosObjeto);
     // echo "</pre><br>";
+    // exit;
     // Ao decodificarmos o JSON, transformamos aquela string em um objeto populado por arrays e objetos!
+
+    // E AQUI TRANSFORMAMOS A STRING RECEBIDA EM ARRAY
+    $usuariosArray = json_decode($usuariosJson, true);
+    // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O JSON DECODIFICADO
+    // echo "<br><pre>";
+    // var_dump($usuariosArray);
+    // echo "</pre><br>";
+    // exit;
+    // Se incluirmos um segundo parâmetro com o valor true, transformamos o JSON em Array,
+    // Ou seja, sem o true, o valor default é false (que transforma o JSON em objeto)
+
+    // DESÇA NA PARTE DA TABELA DE USUÁRIOS PARA VER COMO UTILIZAMOS ESSE OBJETO PARA POPULAR A TABELA DE USUÁRIOS
 
 ?>
 <!-- /CAPTURANDO DADOS DO JSON -->
+
+
+
+<!-- CAPTURANDO DADOS DO FORM E INCLUINDO NO JSON -->
+<?php
+
+    // RECEBENDO DADOS DO FORMULÁRIO
+    // Se estivermos recebendo dados (como usamos o $_REQUEST, pode ser POST ou GET)
+    if(isset($_REQUEST) && $_REQUEST) {
+
+        // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O $_REQUEST RECEBIDO
+        // echo "<br><pre>";
+        // var_dump($_REQUEST);
+        // echo "</pre><br>";
+        // exit;
+
+        // Atrelamos os valores recebidos às variáveis que estamos criando mais abaixo.
+        // Lembrando que o valor do input é capturado através do valor do atributo name do input.
+        // Ou seja, se recebemos valor em $_REQUEST["nome"], é por que o input tem o atributo name="nome".
+        $nome = $_REQUEST["nome"];
+        $sobrenome = $_REQUEST["sobrenome"];
+        $email = $_REQUEST["email"];
+        $senha = $_REQUEST["senha"];
+
+
+        // CRIANDO UM ARRAY COM AS INFORMAÇÕES DO NOVO USUÁRIO
+        // Podemos inserir as novas variáveis e seus valores em um array
+        $novoUsuario = [
+            "nome" => $nome,
+            "sobrenome" => $sobrenome,
+            "email" => $email,
+            "senha" => $senha
+        ];
+        // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O ARRAY DO NOVO USUÁRIO
+        // echo "<br><pre>";
+        // var_dump($novoUsuario);
+        // echo "</pre><br>";
+        
+
+        // INCLUINDO NOVO USUÁRIO AO ARRAY DE USUÁRIOS
+        // E então vamos incluir o array do novo usuário no array de usuários
+        // ATENÇÃO: lembre-se da estrutura do nosso JSON:
+        // dentro do JSON temos o índice (a posição) "usuarios"
+        array_push($usuariosArray["usuarios"], $novoUsuario);
+        // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O ARRAY ATUALIZADO
+        // echo "<br><pre>";
+        // var_dump($usuariosArray);
+        // echo "</pre><br>";
+
+
+        // CODIFICANDO NOSSO ARRAY NOVAMENTE
+        $usuariosJsonAtualizados = json_encode($usuariosArray);
+        // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O JSON CODIFICADO NOVAMENTE
+        // echo "<br><pre>";
+        // var_dump($usuariosJsonAtualizados);
+        // echo "</pre><br>";
+
+
+        // INSERINDO OS VALORES ATUALIZADOS NO ARQUIVO NOVAMENTE
+        file_put_contents("./data/usuarios.json", $usuariosJsonAtualizados);
+        // Agora nosso arquivo com o JSON está atualizado com o novo cadastro.
+        // Vamos redirecionar o usuário para a página usuarios.php novamente,
+        // Para que vejamos a tabela atualizada. Para vermos a atualização
+        // sem sairmos da tela, aprenderemos AJAX no módulo de JavaScript.
+
+        // REDIRECIONANDO O USUÁRIO PARA A LISTA DE USUÁRIOS
+        header('Location: ./usuarios.php');
+        exit;
+
+    }
+
+
+?>
+<!-- /CAPTURANDO DADOS DO FORM E INCLUINDO NO JSON -->
+
 
     <main class="container">
         <article class="row">
@@ -67,7 +158,7 @@
 
                         <!-- 3) E agora vamos percorrer esses objetos com um loop foreach: -->
 
-                        <?php foreach($usuariosObjetos->usuarios as $usuario): ?>
+                        <?php foreach($usuariosObjeto->usuarios as $usuario): ?>
                             
                             <tr>
 
