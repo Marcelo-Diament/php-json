@@ -1,3 +1,16 @@
+<?php
+    
+    // Verificando se há sessão e se temos o usuário logado - só para verem o var_dump da $_SESSION
+    //if(isset($_SESSION) && isset($_SESSION["usuarioLogado"]) ) {
+
+        // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O $_SESSION["usuarioLogado"]
+        // echo "<br><pre>";
+        // var_dump($_SESSION["usuarioLogado"]);
+        // echo "</pre><br>";
+
+    //}
+
+?>
 <body>
     <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -12,11 +25,23 @@
                     <a class="nav-link" href="./index.php">Cadastro <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./login.php">Login</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="./usuarios.php">Usuários</a>
                 </li>
+                <?php
+                    // Verificando se há sessão e se temos o usuário logado:
+                    if(isset($_SESSION["usuarioLogado"]) && $_SESSION["usuarioLogado"] === true ) { ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="./logout.php">Logout</a>
+                    </li>
+
+                <?php } else { ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="./login.php">Login</a>
+                    </li>
+
+                <?php } ?>
             </ul>
         </div>
         </nav>

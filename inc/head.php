@@ -1,3 +1,6 @@
+<!-- INICIANDO UMA SESSÃO -->
+<?php session_start(); ?>
+<!-- /INICIANDO UMA SESSÃO -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

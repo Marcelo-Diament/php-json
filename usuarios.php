@@ -51,7 +51,6 @@
         // echo "<br><pre>";
         // var_dump($_REQUEST);
         // echo "</pre><br>";
-        // exit;
 
         // Atrelamos os valores recebidos às variáveis que estamos criando mais abaixo.
         // Lembrando que o valor do input é capturado através do valor do atributo name do input.
