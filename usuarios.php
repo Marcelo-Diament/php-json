@@ -103,6 +103,21 @@
         // Para que vejamos a tabela atualizada. Para vermos a atualização
         // sem sairmos da tela, aprenderemos AJAX no módulo de JavaScript.
 
+
+        // Vamos aproveitar e já 'logar' nosso usuário
+        // Atenção: isso não é uma boa prática por não ser muito seguro,
+        // Mas faremos assim apenas para fins didáticos.
+        // É bacana para a experiência do usuário, mas há maneiras melhores de fazermos isso
+        // Então vamos lá! Iniciamos uma sessão
+        session_start();
+
+        // Se estiver tudo certo, atrelamos as propriedades do usuário logado à constante superglobal, como chamamos, $_SESSION
+        $_SESSION["usuarioLogado"] = true;
+        $_SESSION["usuarioNome"] = $nome;
+        $_SESSION["usuarioSobrenome"] = $sobrenome;
+        $_SESSION["usuarioEmail"] = $email;
+
+
         // REDIRECIONANDO O USUÁRIO PARA A LISTA DE USUÁRIOS
         header('Location: ./usuarios.php');
         exit;

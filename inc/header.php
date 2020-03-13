@@ -28,18 +28,31 @@
                     <a class="nav-link" href="./usuarios.php">Usuários</a>
                 </li>
                 <?php
-                    // Verificando se há sessão e se temos o usuário logado:
-                    if(isset($_SESSION["usuarioLogado"]) && $_SESSION["usuarioLogado"] === true ) { ?>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="./logout.php">Logout</a>
+                    // Verificando se há sessão e se temos o usuário logado:
+                    if(isset($_SESSION["usuarioLogado"]) && $_SESSION["usuarioLogado"] === true ) { 
+                
+                ?>
+                    <!-- Menu exibido para usuários logados -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="menuUsuario" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i> <?= $_SESSION["usuarioNome"] ?> | Editar Perfil
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="menuUsuario">
+                            <a class="dropdown-item" disabled" href="./editar.php" tabindex="-1" aria-disabled="true">Editar Perfil</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="./logout.php">Logout</a>
+                        </div>
                     </li>
+                    <!-- /Menu exibido para usuários logados -->
 
                 <?php } else { ?>
 
+                    <!-- Menu exibido para usuários não logados -->
                     <li class="nav-item">
                         <a class="nav-link" href="./login.php">Login</a>
                     </li>
+                    <!-- /Menu exibido para usuários não logados -->
 
                 <?php } ?>
             </ul>
