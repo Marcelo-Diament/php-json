@@ -59,7 +59,9 @@
         $nome = $_REQUEST["nome"];
         $sobrenome = $_REQUEST["sobrenome"];
         $email = $_REQUEST["email"];
-        $senha = $_REQUEST["senha"];
+        // Para a senha, utilizaremos a função password_hash, de modo que não seja possível ver a senha do usuário:
+        $senha = password_hash($_REQUEST["senha"], PASSWORD_DEFAULT);
+        // Para saber mais sobre essa função de 'hashear' a senha, acesse https://www.php.net/manual/en/function.password-hash.php.
 
 
         // CRIANDO UM ARRAY COM AS INFORMAÇÕES DO NOVO USUÁRIO

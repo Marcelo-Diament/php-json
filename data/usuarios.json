@@ -1,1 +1,40 @@
-{"usuarios":[{"nome":"Fulano","sobrenome":"da Silva","email":"fulano@dasilva.com","senha":"123456"},{"nome":"Ciclano","sobrenome":"da Silva","email":"ciclano@dasilva.com","senha":"123654"},{"nome":"Beltrano","sobrenome":"da Silva","email":"beltrano@dasilva.com","senha":"654321"},{"nome":"Professor Victor","sobrenome":"Torres","email":"professor@victor.com","senha":"profVitor123"},{"nome":"Professor Marcelo","sobrenome":"Diament","email":"professor@marcelo.com","senha":"987654321"}]}
+{
+    "usuarios": [
+        {
+            "nome": "Fulano",
+            "sobrenome": "da Silva",
+            "email": "fulano@dasilva.com",
+            "senha": "123456"
+        },
+        {
+            "nome": "Ciclano",
+            "sobrenome": "da Silva",
+            "email": "ciclano@dasilva.com",
+            "senha": "123654"
+        },
+        {
+            "nome": "Beltrano",
+            "sobrenome": "da Silva",
+            "email": "beltrano@dasilva.com",
+            "senha": "654321"
+        },
+        {
+            "nome": "Professor Victor",
+            "sobrenome": "Torres",
+            "email": "professor@victor.com",
+            "senha": "profVitor123"
+        },
+        {
+            "nome": "Professor Marcelo",
+            "sobrenome": "Diament",
+            "email": "professor@marcelo.com",
+            "senha": "987654321"
+        },
+        {
+            "nome": "Abiro",
+            "sobrenome": "Oswaldo",
+            "email": "abirow@svaldo.com",
+            "senha": "$2y$10$eSep0TezlV\/kc6b6HGIptePxuiyfDND9pDzYM5MMkEBV8o2EW2LJ2"
+        }
+    ]
+}
