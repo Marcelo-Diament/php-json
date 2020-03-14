@@ -39,7 +39,7 @@
                         <i class="fa fa-user"></i> <?= $_SESSION["usuarioNome"] ?> | Editar Perfil
                         </a>
                         <div class="dropdown-menu" aria-labelledby="menuUsuario">
-                            <a class="dropdown-item" disabled" href="./editar.php" tabindex="-1" aria-disabled="true">Editar Perfil</a>
+                            <a class="dropdown-item" disabled href="#" tabindex="-1" aria-disabled="true">Editar Perfil</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="./logout.php">Logout</a>
                         </div>

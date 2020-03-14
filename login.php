@@ -51,7 +51,7 @@
 
         // Agora que já sabemos se esse email existe, vamos verificar se a senha do usuário que tem esse email bate
         // Antes de verificarmos, vamos verificar se o usuário que está logando existe (se existe $usuarioLogando)
-        if($usuarioLogando) {
+        if(isset($usuarioLogando) && $usuarioLogando) {
 
             // Mas ela está criptografada, então precisamos fazer uma verificação do hash.
             // Para isso, existe mais uma função: password_verify, que compara duas senhas (a 'crua' e a 'hasheada')
