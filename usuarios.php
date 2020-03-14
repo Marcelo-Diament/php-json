@@ -133,13 +133,13 @@
         <article class="row">
             <section class="col-12 mx-auto bg-light my-5 py-5 rounded border" id="usuariosTb">
                 <h3 class="col-12 text-center my-3"><?= $tituloPagina ?></h3>
-                <table class="table my-5">
+                <table class="table mt-5 mb-2 text-center bg-white">
                     <thead class="thead-dark">
                         <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Sobrenome</th>
-                        <th scope="col">email</th>
-                        <th scope="col">Senha</th>
+                            <th scope="col" colspan="2">Nome Completo</th>
+                            <th scope="col">email</th>
+                            <th scope="col">Senha</th>
+                            <th scope="col" colspan="2">Opções</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -178,10 +178,16 @@
                             
                             <tr>
 
-                                <th scope="row"><?= $usuario->nome; ?></th>
-                                <td><?= $usuario->sobrenome; ?></td>
-                                <td><?= $usuario->email; ?></td>
-                                <td><?= $usuario->senha; ?></td>
+                                <th scope="row" colspan="2" class="text-left pl-4"><?= $usuario->nome . " " . $usuario->sobrenome; ?></th>
+                                <td class="text-left"><a href="mailto:<?= $usuario->email; ?>?subject=Contato%20via%20Site%20PHP%20JSON" title="Enviar email para <?= $usuario->nome ?>"><?= $usuario->email; ?></a></td>
+                                <!-- A função abaixo mantém apenas 10 caracteres
+                                (a partir do caractere 0, o primeiro) e concatena com '...' -->
+                                <td><?= substr($usuario->senha,0,10)."..."; ?></td>
+                                <td colspan="2" class="pr-0">
+                                    <a href="./usuario.php/?<?= $usuario->email ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                    <a href="./editar.php/?<?= $usuario->email ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+                                    <a href="./excluir.php/?<?= $usuario->email ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                </td>
 
                             </tr>
     
