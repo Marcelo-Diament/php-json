@@ -1,1 +1,28 @@
-{"usuarios":[{"nome":"Abiroswagner","sobrenome":"Oswaldo","email":"abirow@svaldo.com","senha":"$2y$10$nlTChfnHofJpzPRwZqeybuUdWlZ8iOAbCdZa3dz1tshKm1QdmKncu"},{"nome":"Marcelo","sobrenome":"Diament","email":"marcelo@diament.com.br","senha":"$2y$10$i6FQm2CwL77w55WltwLNhuwbnQ7YhJt3PRwJw22rnG9UonDtKTev."},{"nome":"Professor Marcelo","sobrenome":"Diament","email":"marcelo@diament.com","senha":"$2y$10$g33YiGN4zKJjF0e.guXL5OzntEzTw1WQHFCnnTEwchE6qrop9PTcu"},{"nome":"Professor Victor","sobrenome":"Torres","email":"victor@torres.com.br","senha":"$2y$10$Ma1jlHlDFyrzgiWMbPuQ3.OAv8tVYlk6khM4lC\/sWAUNE5OysEYVm"},{"nome":"Fulano","sobrenome":"da Silva","email":"fulano@dasilva.com","senha":"$2y$10$Azqmkwgleuk.T5cUIc3xve0DRUdd7mQ2flcXAdN7sbk702hMr8Cxm"},{"nome":"Abirosvaldo","sobrenome":"Waldo","email":"abirosvaldo@birobiro.com","senha":"$2y$10$frF4y\/JSf3nBjSuCIWNc6OFa7IxuMEe.9Ea\/mHcGf15Nn6aHopExu"}]}
+{
+    "usuarios": [
+        {
+            "nome": "Abiroswagner",
+            "sobrenome": "Oswaldo",
+            "email": "abirow@svaldo.com",
+            "senha": "$2y$10$nlTChfnHofJpzPRwZqeybuUdWlZ8iOAbCdZa3dz1tshKm1QdmKncu"
+        },
+        {
+            "nome": "Professor Marcelo",
+            "sobrenome": "Diament",
+            "email": "marcelo@diament.com",
+            "senha": "$2y$10$g33YiGN4zKJjF0e.guXL5OzntEzTw1WQHFCnnTEwchE6qrop9PTcu"
+        },
+        {
+            "nome": "Professor Victor",
+            "sobrenome": "Torres",
+            "email": "victor@torres.com.br",
+            "senha": "$2y$10$Ma1jlHlDFyrzgiWMbPuQ3.OAv8tVYlk6khM4lC\/sWAUNE5OysEYVm"
+        },
+        {
+            "nome": "Fulano",
+            "sobrenome": "da Silva",
+            "email": "fulano@dasilva.com",
+            "senha": "$2y$10$Azqmkwgleuk.T5cUIc3xve0DRUdd7mQ2flcXAdN7sbk702hMr8Cxm"
+        }
+    ]
+}

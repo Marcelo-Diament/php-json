@@ -118,7 +118,7 @@ if (isset($_REQUEST) && $_REQUEST) {
                                     <input type="hidden" name="editar" value="editar">
                                     <button type="submit" name="usuarioEmail" value="<?= $usuarioEncontrado["email"]; ?>" title="Editar dados de <?= $usuarioEncontrado["nome"] ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
                                 </form>
-                                <form id="excluirUsuario" action="./usuario.php" method="post" class="d-inline">
+                                <form id="excluirUsuario" action="./usuarios.php" method="post" class="d-inline">
                                     <input type="hidden" name="excluir" value="excluir">
                                     <button type="submit" name="usuarioEmail" value="<?= $usuarioEncontrado["email"]; ?>" title="Excluir <?= $usuarioEncontrado["nome"] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                 </form>

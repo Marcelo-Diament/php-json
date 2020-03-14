@@ -55,12 +55,26 @@ if (isset($_REQUEST) && $_REQUEST) {
     // Atrelamos os valores recebidos às variáveis que estamos criando mais abaixo.
     // Lembrando que o valor do input é capturado através do valor do atributo name do input.
     // Ou seja, se recebemos valor em $_REQUEST["nome"], é por que o input tem o atributo name="nome".
-    $nome = $_REQUEST["nome"];
-    $sobrenome = $_REQUEST["sobrenome"];
-    $email = $_REQUEST["email"];
-    // Para a senha, utilizaremos a função password_hash, de modo que não seja possível ver a senha do usuário:
-    $senha = password_hash($_REQUEST["senha"], PASSWORD_DEFAULT);
-    // Para saber mais sobre essa função de 'hashear' a senha, acesse https://www.php.net/manual/en/function.password-hash.php.
+
+    if (isset($_REQUEST["usuarioEmail"]) && $_REQUEST["usuarioEmail"]) {
+        // Se recebermos os names no formato usuarioCampo...
+        // Aqui, nesse caso, recebemos nesse formato - nessa página - recebemos para excluir o user
+
+        $email = $_REQUEST["usuarioEmail"];
+
+    } elseif (isset($_REQUEST["email"]) && $_REQUEST["email"]) {
+        // Se recebermo os names no formato campo
+
+        $nome = $_REQUEST["nome"];
+        $sobrenome = $_REQUEST["sobrenome"];
+        $email = $_REQUEST["email"];
+        // Para a senha, utilizaremos a função password_hash, de modo que não seja possível ver a senha do usuário:
+        $senha = password_hash($_REQUEST["senha"], PASSWORD_DEFAULT);
+        // Para saber mais sobre essa função de 'hashear' a senha, acesse https://www.php.net/manual/en/function.password-hash.php.
+
+    }
+
+    
 
     // SE RECEBERMOS O INPUT COM NAME cadastrarUsuario (OU SEJA, SE O USUÁRIO ESTIVER SE CADASTRANDO)
     if (isset($_REQUEST["cadastrarUsuario"]) && $_REQUEST["cadastrarUsuario"] === "cadastrarUsuario") {
@@ -113,6 +127,31 @@ if (isset($_REQUEST) && $_REQUEST) {
             }
         }
 
+    }  elseif (isset($_REQUEST["excluir"]) && $_REQUEST["excluir"] === "excluir") {
+        // OU... SE O USUÁRIO ESTIVER SENDO EXCLUÍDO...
+    
+        // Vamos percorrer o array de usuários para ver se encontramos o email
+        // Estamos usando um FOR para termos o índice de cada usuário
+        for($i = 0; $i < count($usuariosArray["usuarios"]); $i++) {
+    
+            // Se encontrarmos um email que coincida com o email enviado...
+            if ($usuariosArray["usuarios"][$i]["email"] === $email) {
+    
+                // Excluímos o índice em que houve a coincidência com a função unset
+                // O parâmetro um é o array e o segundo é o índice onde a função começará a remover os índices
+                // Pode haver um terceiro parâmetro, que define quantos índices serão removidos
+                array_splice($usuariosArray["usuarios"],$i,1);
+    
+            } else {
+
+                // Se não encontrarmos...
+    
+                // Salvamos a variável $erro com o motivo do erro
+                $erro = "Usuário não encontrado!";
+            }
+            
+        }
+
     }
 
     // CODIFICANDO NOSSO ARRAY NOVAMENTE
@@ -159,7 +198,14 @@ if (isset($_REQUEST) && $_REQUEST) {
         header('Location: ./usuarios.php');
         exit;
     
-    }
+    }  elseif (isset($_REQUEST["excluir"]) && $_REQUEST["excluir"] === "excluir") {
+        // /SE O USUÁRIO ESTIVER SENDO EXCLUÍDO...
+    
+            // RECARREGAMOS A PÁGINA PARA ATUALIZAR A LISTA DE USUÁRIOS (posteriormente aprenderemos a fazer isso com AJAX sem sair da página)
+            header('Location: ./usuarios.php');
+            exit;
+        
+        }
     
 
 }
@@ -232,7 +278,7 @@ if (isset($_REQUEST) && $_REQUEST) {
                                     <input type="hidden" name="editar" value="editar">
                                     <button type="submit" name="usuarioEmail" value="<?= $usuario->email ?>" title="Editar dados de <?= $usuario->nome ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
                                 </form>
-                                <form id="excluirUsuario" action="./usuario.php" method="post" class="d-inline">
+                                <form id="excluirUsuario" action="./usuarios.php" method="post" class="d-inline">
                                     <input type="hidden" name="excluir" value="excluir">
                                     <button type="submit" name="usuarioEmail" value="<?= $usuario->email ?>" title="Excluir <?= $usuario->nome ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                 </form>
