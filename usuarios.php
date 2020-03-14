@@ -62,31 +62,58 @@ if (isset($_REQUEST) && $_REQUEST) {
     $senha = password_hash($_REQUEST["senha"], PASSWORD_DEFAULT);
     // Para saber mais sobre essa função de 'hashear' a senha, acesse https://www.php.net/manual/en/function.password-hash.php.
 
+    // SE RECEBERMOS O INPUT COM NAME cadastrarUsuario (OU SEJA, SE O USUÁRIO ESTIVER SE CADASTRANDO)
+    if (isset($_REQUEST["cadastrarUsuario"]) && $_REQUEST["cadastrarUsuario"] === "cadastrarUsuario") {
 
-    // CRIANDO UM ARRAY COM AS INFORMAÇÕES DO NOVO USUÁRIO
-    // Podemos inserir as novas variáveis e seus valores em um array
-    $novoUsuario = [
-        "nome" => $nome,
-        "sobrenome" => $sobrenome,
-        "email" => $email,
-        "senha" => $senha
-    ];
-    // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O ARRAY DO NOVO USUÁRIO
-    // echo "<br><pre>";
-    // var_dump($novoUsuario);
-    // echo "</pre><br>";
+        // CRIANDO UM ARRAY COM AS INFORMAÇÕES DO NOVO USUÁRIO
+        // Podemos inserir as novas variáveis e seus valores em um array
+        $novoUsuario = [
+            "nome" => $nome,
+            "sobrenome" => $sobrenome,
+            "email" => $email,
+            "senha" => $senha
+        ];
+        // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O ARRAY DO NOVO USUÁRIO
+        // echo "<br><pre>";
+        // var_dump($novoUsuario);
+        // echo "</pre><br>";
 
 
-    // INCLUINDO NOVO USUÁRIO AO ARRAY DE USUÁRIOS
-    // E então vamos incluir o array do novo usuário no array de usuários
-    // ATENÇÃO: lembre-se da estrutura do nosso JSON:
-    // dentro do JSON temos o índice (a posição) "usuarios"
-    array_push($usuariosArray["usuarios"], $novoUsuario);
-    // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O ARRAY ATUALIZADO
-    // echo "<br><pre>";
-    // var_dump($usuariosArray);
-    // echo "</pre><br>";
+        // INCLUINDO NOVO USUÁRIO AO ARRAY DE USUÁRIOS
+        // E então vamos incluir o array do novo usuário no array de usuários
+        // ATENÇÃO: lembre-se da estrutura do nosso JSON:
+        // dentro do JSON temos o índice (a posição) "usuarios"
+        array_push($usuariosArray["usuarios"], $novoUsuario);
+        // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O ARRAY ATUALIZADO
+        // echo "<br><pre>";
+        // var_dump($usuariosArray);
+        // echo "</pre><br>";
 
+    } elseif (isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] === "editarUsuario") {
+    // OU... SE O USUÁRIO ESTIVER SENDO EDITADO...
+
+        // Vamos percorrer o array de usuários para ver se encontramos o email
+        // Estamos usando um FOR para termos o índice de cada usuário
+        for($i = 0; $i < count($usuariosArray["usuarios"]); $i++) {
+    
+            // Se encontrarmos um email que coincida com o email enviado...
+            if ($usuariosArray["usuarios"][$i]["email"] === $email) {
+    
+                // Atrelamos os novos dados inseridos ao usuário encontrado
+                $usuariosArray["usuarios"][$i]["nome"] = $nome;
+                $usuariosArray["usuarios"][$i]["sobrenome"] = $sobrenome;
+                $usuariosArray["usuarios"][$i]["senha"] = $senha;
+    
+            } else {
+
+                // Se não encontrarmos...
+    
+                // Salvamos a variável $erro com o motivo do erro
+                $erro = "Usuário não encontrado!";
+            }
+        }
+
+    }
 
     // CODIFICANDO NOSSO ARRAY NOVAMENTE
     $usuariosJsonAtualizados = json_encode($usuariosArray);
@@ -104,23 +131,37 @@ if (isset($_REQUEST) && $_REQUEST) {
     // sem sairmos da tela, aprenderemos AJAX no módulo de JavaScript.
 
 
-    // Vamos aproveitar e já 'logar' nosso usuário
-    // Atenção: isso não é uma boa prática por não ser muito seguro,
-    // Mas faremos assim apenas para fins didáticos.
-    // É bacana para a experiência do usuário, mas há maneiras melhores de fazermos isso
-    // Então vamos lá! Iniciamos uma sessão
-    session_start();
+    // SE O USUÁRIO ESTIVER SE CADASTRANDO...
+    if (isset($_REQUEST["cadastrarUsuario"]) && $_REQUEST["cadastrarUsuario"] === "true") {
 
-    // Se estiver tudo certo, atrelamos as propriedades do usuário logado à constante superglobal, como chamamos, $_SESSION
-    $_SESSION["usuarioLogado"] = true;
-    $_SESSION["usuarioNome"] = $nome;
-    $_SESSION["usuarioSobrenome"] = $sobrenome;
-    $_SESSION["usuarioEmail"] = $email;
+        // Vamos aproveitar e já 'logar' nosso usuário
+        // Atenção: isso não é uma boa prática por não ser muito seguro,
+        // Mas faremos assim apenas para fins didáticos.
+        // É bacana para a experiência do usuário, mas há maneiras melhores de fazermos isso
+        // Então vamos lá! Iniciamos uma sessão
+        session_start();
+
+        // Se estiver tudo certo, atrelamos as propriedades do usuário logado à constante superglobal, como chamamos, $_SESSION
+        $_SESSION["usuarioLogado"] = true;
+        $_SESSION["usuarioNome"] = $nome;
+        $_SESSION["usuarioSobrenome"] = $sobrenome;
+        $_SESSION["usuarioEmail"] = $email;
 
 
-    // REDIRECIONANDO O USUÁRIO PARA A LISTA DE USUÁRIOS
-    header('Location: ./usuarios.php');
-    exit;
+        // REDIRECIONANDO O USUÁRIO PARA A LISTA DE USUÁRIOS
+        header('Location: ./usuarios.php');
+        exit;
+    
+    }  elseif (isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] === "editarUsuario") {
+    // /SE O USUÁRIO ESTIVER SENDO EDITADO...
+
+        // RECARREGAMOS A PÁGINA PARA ATUALIZAR A LISTA DE USUÁRIOS (posteriormente aprenderemos a fazer isso com AJAX sem sair da página)
+        header('Location: ./usuarios.php');
+        exit;
+    
+    }
+    
+
 }
 
 

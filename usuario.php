@@ -54,7 +54,11 @@ if (isset($_REQUEST) && $_REQUEST) {
 
     // Atrelamos o valor recebido (no caso sabemos que será um email) à variável $email.
     // Lembrando que o valor recebido veio na própria URL, inserido 'manualmente' na montagem do link.
-    $email = $_REQUEST["usuarioEmail"];
+    if (isset($_REQUEST["usuarioEmail"]) && $_REQUEST["usuarioEmail"]) {
+        $email = $_REQUEST["usuarioEmail"];
+    } elseif (isset($_REQUEST["email"]) && $_REQUEST["email"]) {
+        $email = $_REQUEST["email"];
+    }
 
 
     // Agora vamos percorrer o array de usuários para ver se encontramos o email:
@@ -112,11 +116,11 @@ if (isset($_REQUEST) && $_REQUEST) {
                             <td colspan="2" class="pr-0">
                                 <form id="editarUsuario" action="./usuario.php" method="post" class="d-inline">
                                     <input type="hidden" name="editar" value="editar">
-                                    <button type="submit" name="usuarioEmail" value="<?= $usuario->email ?>" title="Editar dados de <?= $usuario->nome ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
+                                    <button type="submit" name="usuarioEmail" value="<?= $usuarioEncontrado["email"]; ?>" title="Editar dados de <?= $usuarioEncontrado["nome"] ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
                                 </form>
                                 <form id="excluirUsuario" action="./usuario.php" method="post" class="d-inline">
                                     <input type="hidden" name="excluir" value="excluir">
-                                    <button type="submit" name="usuarioEmail" value="<?= $usuario->email ?>" title="Excluir <?= $usuario->nome ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                    <button type="submit" name="usuarioEmail" value="<?= $usuarioEncontrado["email"]; ?>" title="Excluir <?= $usuarioEncontrado["nome"] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>
@@ -125,6 +129,46 @@ if (isset($_REQUEST) && $_REQUEST) {
 
             <?php endif; ?>
             <!-- /CASO A GENTE RECEBA $_REQUEST["ver"] EXIBIMOS AS INFORMAÇÕES VINDAS DO JSON NUMA TABELA -->
+
+            <!-- CASO A GENTE RECEBA $_REQUEST["editar"] EXIBIMOS AS INFORMAÇÕES VINDAS DO JSON NUM FORM PREENCHIDO -->
+            <?php if (isset($_REQUEST) && isset($_REQUEST["editar"]) && $_REQUEST["editar"] === "editar") : ?>
+
+                <form action="usuarios.php" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required value="<?= $usuarioEncontrado["nome"] ?>">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sobrenome">Sobrenome</label>
+                            <input type="text" class="form-control" id="sobrenome" name="sobrenome" required value="<?= $usuarioEncontrado["sobrenome"] ?>">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                        <label for="emailCadastrado">email</label>
+                        <input type="email" class="form-control" id="emailCadastrado" name="emailCadastrado" disabled value="<?= $usuarioEncontrado["email"] ?>">
+                        <input type="hidden" class="form-control" id="email" name="email" required value="<?= $usuarioEncontrado["email"] ?>">
+                        </div>
+                        <div class="form-group col-md-6">
+                        <label for="senha">Senha (preencha a atual ou uma nova - obrigatório)</label>
+                        <input type="password" class="form-control" id="senha" name="senha" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck" checked>
+                        <label class="form-check-label" for="gridCheck">
+                            Concordo com os termos
+                        </label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="editarUsuario" value="editarUsuario">
+                    <button type="submit" class="btn btn-primary float-right" id="btnAtualizar">Atualizar</button>
+                </form>
+
+            <?php endif; ?>
+            <!-- /CASO A GENTE RECEBA $_REQUEST["editar"] EXIBIMOS AS INFORMAÇÕES VINDAS DO JSON NUM FORM PREENCHIDO -->
 
         </section>
     </article>

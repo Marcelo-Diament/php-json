@@ -4,7 +4,7 @@
     <main class="container">
         <article class="row">
             <section class="col-12 mx-auto bg-light my-5 py-5 rounded border" id="cadastroForm">
-            <h3 class="col-12 text-center my-3"><?= $tituloPagina ?></h3>
+                <h3 class="col-12 text-center my-3"><?= $tituloPagina ?></h3>
                 <form action="usuarios.php" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -34,7 +34,8 @@
                         </label>
                         </div>
                     </div>
-                        <button type="submit" class="btn btn-primary float-right" id="btnCadastrar">Cadastrar</button>
+                    <input type="hidden" name="cadastrarUsuario" value="cadastrarUsuario">
+                    <button type="submit" class="btn btn-primary float-right" id="btnCadastrar">Cadastrar</button>
                 </form>
             </section>
         </article>
