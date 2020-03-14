@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="./index.php">Cadastro <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="./index.php">Início <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./usuarios.php">Usuários</a>
@@ -49,6 +49,9 @@
                 <?php } else { ?>
 
                     <!-- Menu exibido para usuários não logados -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="./cadastro.php">Cadastre-se</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./login.php">Login</a>
                     </li>
