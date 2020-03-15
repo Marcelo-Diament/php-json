@@ -194,7 +194,7 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
                 $idMax = 0;
 
                 // Verificando cada um dos registros vindos de $$indice
-                foreach ($$indice as $registro => $detalhes) :
+                foreach ($$indice as $registro) :
 
                     // Se a chave for ID e for maior que o $idMax
                     $registro["id"] > $idMax
@@ -224,27 +224,7 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
 
                 $jsonTemporario = getJson($arquivo);
 
-                // Percorre cada objeto do índice declarado no parâmetro 1
-                foreach ($jsonTemporario as $indicesNivelUm => $objetos) :
-
-                    // Checa se o $indice coincide com algum dos índices de primeiro nível
-                    if ($indicesNivelUm === $indice) :
-
-                        // Atualiza o índice de acordo com o novo índice
-                        $jsonTemporario[$indicesNivelUm] = $$indice;
-
-                    else :
-
-                        // Descrição do erro caso não haja coincidência entre busca e registros
-                        $erro = "Índice não localizado";
-
-                        // Retornamos erro
-                        return $erro;
-                        die;
-
-                    endif;
-
-                endforeach;
+                $jsonTemporario[$indice] = $$indice;
 
             // Se houver idenficiador... ou seja, se estivermos editando um registro...
             else :
@@ -350,7 +330,7 @@ function unsetRegister(string $indice, array $identificador, string $arquivo = "
         $arrayTemporario = [];
         $usuarioExiste = false;
 
-        for ( $i = 0; $i < count($$indice); $i++ ) :
+        for ($i = 0; $i < count($$indice); $i++) :
 
             // Se o identificador não corresponder com o identificador enviado...
             if ($$indice[$i][$identificador[0]] != $identificador[1]) :
@@ -368,7 +348,7 @@ function unsetRegister(string $indice, array $identificador, string $arquivo = "
         endfor;
 
         // Se não houver nenhuma correspondência,
-        if ( $usuarioExiste === false ) :
+        if ($usuarioExiste === false) :
 
             // Definimos um erro
             $erro = "Usuário não existe";
@@ -378,7 +358,7 @@ function unsetRegister(string $indice, array $identificador, string $arquivo = "
 
             // E travamos a função
             die;
-            
+
         endif;
 
     endif;
