@@ -6,7 +6,7 @@
 <?php
 
 // ESTAMOS PUXANDO O CONTEÚDO DO ARQUIVO DECLARADO COMO PARÂMETRO
-$usuariosJson = file_get_contents("./data/usuarios.json");
+$usuariosJson = file_get_contents("./data/dados.json");
 // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O JSON DA MANEIRA QUE RECEBEMOS
 // echo "<br><pre>";
 // var_dump($usuariosJson);
@@ -163,7 +163,7 @@ if (isset($_REQUEST) && $_REQUEST) {
 
 
     // INSERINDO OS VALORES ATUALIZADOS NO ARQUIVO NOVAMENTE
-    file_put_contents("./data/usuarios.json", $usuariosJsonAtualizados);
+    file_put_contents("./data/dados.json", $usuariosJsonAtualizados);
     // Agora nosso arquivo com o JSON está atualizado com o novo cadastro.
     // Vamos redirecionar o usuário para a página usuarios.php novamente,
     // Para que vejamos a tabela atualizada. Para vermos a atualização

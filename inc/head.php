@@ -1,9 +1,9 @@
-<!-- INICIANDO UMA SESSÃO -->
-
-<?php session_start(); ?>
-
-<!-- /INICIANDO UMA SESSÃO -->
-
+<!-- PRESETS -->
+<?php
+    require_once('./utils/functions.php');
+    init( );
+?>
+<!-- /PRESETS -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 

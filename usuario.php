@@ -6,7 +6,7 @@
 <?php
 
 // ESTAMOS PUXANDO O CONTEÚDO DO ARQUIVO DECLARADO COMO PARÂMETRO
-$usuariosJson = file_get_contents("./data/usuarios.json");
+$usuariosJson = file_get_contents("./data/dados.json");
 // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O JSON DA MANEIRA QUE RECEBEMOS
 // echo "<br><pre>";
 // var_dump($usuariosJson);

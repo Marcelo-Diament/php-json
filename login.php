@@ -22,10 +22,10 @@
         // echo "</pre><br>";
         // exit;
 
-        // Agora vamos verificar se existe esse email no nosso arquivo usuarios.json
+        // Agora vamos verificar se existe esse email no nosso arquivo dados.json
 
         // O primeiro passo é recebermos nosso JSON como array (ou poderia ser como objeto também)
-        $usuariosJson = file_get_contents("./data/usuarios.json");
+        $usuariosJson = file_get_contents("./data/dados.json");
         $usuariosArray = json_decode($usuariosJson, true);
 
         // Agora vamos percorrer esse array para ver se encontramos o email:
