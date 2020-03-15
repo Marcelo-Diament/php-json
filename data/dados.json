@@ -8,7 +8,7 @@
             "senha": "$2y$10$nlTChfnHofJpzPRwZqeybuUdWlZ8iOAbCdZa3dz1tshKm1QdmKncu"
         },
         {
-            "id": 10,
+            "id": 1,
             "nome": "Professor Marcelo",
             "sobrenome": "Diament",
             "email": "marcelo@diament.com",
@@ -41,6 +41,13 @@
             "sobrenome": "Joselito",
             "email": "jose@lito.com",
             "senha": "$2y$10$WzUab4uAsOFJR29ZpIQLceAw5Ou\/alGoQ3s4RqwB0xr0quAcZLQ\/S"
+        },
+        {
+            "id": 1,
+            "nome": "Jos\u00e9",
+            "sobrenome": "da Silva",
+            "email": "jose@dasilva.com",
+            "senha": "$2y$10$NFO7kckvY6TZ5fHgYJRraeGk9a6RY9CMnkhBRuyXRUIGkSWkIhjRe"
         }
     ]
 }

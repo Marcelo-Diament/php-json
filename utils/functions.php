@@ -83,8 +83,28 @@ function getRegisters(string $indice, array $identificador = null, string $arqui
     // Define o retorno de acordo com o parâmetro 3
     if ($identificador === null) :
 
+        // Partimos do presuposto de que o índice não existe
+        $encontrouIndice = false;
+
+        // Verificamos se o índice existe
+        $encontrouIndice = array_key_exists($indice, getJson($arquivo));
+
+        // Se não encotnrarmos o índice
+        if ( $encontrouIndice === false ) :
+
+            // Declaramos o erro
+            $erro = "Índice não encontrado";
+
+            // E retornamos o erro
+            return $erro;
+
+            die;
+
+        endif;
+
         // $retorno contém todos os objetos dentro do índice definido
         $retorno = getJson($arquivo)[$indice];
+        
 
     else :
 
@@ -151,62 +171,84 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
         // Criando uma 'variable variable', ou seja, o nome dessa variável será o valor do parâmetro $indice. Então se inserirmos 'usuarios' como índice, a variável se chamará $usuarios. Para usar esse recurso num 'echo' é necessário declarar dentro de chaves: ${$indice}.
         $$indice = getRegisters($indice, $identificador, $arquivo);
 
-        // Se não houver identificador
-        if ($identificador === null) :
+        // Partimos do presuposto de que o índice não existe
+        $encontrouIndice = false;
 
-            // ID Máximo Inicial
-            $idMax = 0;
-            
-            // Verificando cada um dos registros vindos de $$indice
-            foreach ( $$indice as $registro ) :
+        // Verificamos se o índice existe
+        $encontrouIndice = array_key_exists($indice, getJson($arquivo));
 
-                // Se a chave for ID e for maior que o $idMax
-                $registro["id"] > $idMax
-                    // Atribuímos o valor ao $idMax (if do tipo short-circuit) - ou seja, pegamos o maior ID existente no array de objetos, independente da ordem em que aparece
-                    && $idMax = $registro["id"];
+        // Se não encotnrarmos o índice
+        if ( $encontrouIndice === false ) :
 
-            endforeach;
+            // Declaramos o erro
+            $erro = "Índice não encontrado";
 
-            // Definimos o novo ID sendo uma unidade maior que o maior ID encontrado em $$indice
-            $idNovo = ++$idMax;
+            // E retornamos o erro
+            return $erro;
 
-            // Agora vamos inserir o $idNovo como primeiro item do novo registro somando o novo array ("id"=>$idNovo) com o array $novoRegistro original.
-            $novoRegistro = array("id"=>$idNovo)+$novoRegistro;
+            die;
 
-            // Loop percorrendo cada par de chave => valor do $novoRegistro.
-            foreach ($novoRegistro as $key => $value) :
+        else:
 
-                // Verificando se há um campo chamado 'senha' no registro (com if short-circuit) e criptografando a senha
-                $key === "senha"
-                    && $novoRegistro[$key] = password_hash($value, PASSWORD_DEFAULT);
+            // Se não houver identificador
+            if ($identificador === null) :
 
-            endforeach;
+                // ID Máximo Inicial
+                $idMax = 0;
+                
+                // Verificando cada um dos registros vindos de $$indice
+                foreach ( $$indice as $registro => $detalhes ) :
 
-            // Adição do objeto ao $$indice
-            array_push($$indice, $novoRegistro);
+                    // Se a chave for ID e for maior que o $idMax
+                    $registro["id"] > $idMax
+                        // Atribuímos o valor ao $idMax (if do tipo short-circuit) - ou seja, pegamos o maior ID existente no array de objetos, independente da ordem em que aparece
+                        && $idMax = $registro["id"];
 
-            $jsonTemporario = getJson($arquivo);
+                endforeach;
 
-            // Percorre cada objeto do índice declarado no parâmetro 1
-            foreach ($jsonTemporario as $indicesNivelUm => $objetos) :
+                // Definimos o novo ID sendo uma unidade maior que o maior ID encontrado em $$indice
+                $idNovo = ++$idMax;
 
-                // Checa se o $indice coincide com algum dos índices de primeiro nível
-                if ($indicesNivelUm === $indice) :
+                // Agora vamos inserir o $idNovo como primeiro item do novo registro somando o novo array ("id"=>$idNovo) com o array $novoRegistro original.
+                $novoRegistro = array("id"=>$idNovo)+$novoRegistro;
 
-                    // Atualiza o índice de acordo com o novo índice
-                    $jsonTemporario[$indicesNivelUm] = $$indice;
+                // Loop percorrendo cada par de chave => valor do $novoRegistro.
+                foreach ($novoRegistro as $key => $value) :
 
-                else :
+                    // Verificando se há um campo chamado 'senha' no registro (com if short-circuit)
+                    $key === "senha"
+                        // Criptografando a senha
+                        && $novoRegistro[$key] = password_hash($value, PASSWORD_DEFAULT);
 
-                    // Descrição do erro caso não haja coincidência entre busca e registros
-                    $erro = "Registro não localizado";
+                endforeach;
 
-                    // Atrelando o erro ao $retorno
-                    $retorno = $erro;
+                // Adição do objeto ao $$indice
+                array_push($$indice, $novoRegistro);
 
-                endif;
+                $jsonTemporario = getJson($arquivo);
 
-            endforeach;
+                // Percorre cada objeto do índice declarado no parâmetro 1
+                foreach ($jsonTemporario as $indicesNivelUm => $objetos) :
+
+                    // Checa se o $indice coincide com algum dos índices de primeiro nível
+                    if ($indicesNivelUm === $indice) :
+
+                        // Atualiza o índice de acordo com o novo índice
+                        $jsonTemporario[$indicesNivelUm] = $$indice;
+
+                    else :
+
+                        // Descrição do erro caso não haja coincidência entre busca e registros
+                        $erro = "Índice não localizado";
+
+                        // Atrelando o erro ao $retorno
+                        $retorno = $erro;
+
+                    endif;
+
+                endforeach;
+
+            endif;
 
         endif;
 
@@ -225,5 +267,5 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
 
     // Retorna o $retorno
     return $retorno;
-    
+
 };
