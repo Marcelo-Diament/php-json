@@ -24,6 +24,27 @@ if ( isset($_REQUEST["cadastrarUsuario"]) && $_REQUEST["cadastrarUsuario"] ) :
 endif;
 ?>
 <!-- /INCLUINDO REGISTRO NO JSON -->
+<?php
+if ( isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] ) :
+
+    $arrayNovoUsuario = [
+        "nome" => $_REQUEST["nome"],
+        "sobrenome" => $_REQUEST["sobrenome"],
+        "email" => $_REQUEST["email"],
+        "senha" => $_REQUEST["senha"]
+    ];
+
+    $identificador = ["email", $_REQUEST["email"]];
+
+    setRegister("usuarios", $arrayNovoUsuario, $identificador);
+
+    header("Location: usuarios.php");
+
+endif;
+?>
+<!-- EDITANDO REGISTRO NO JSON -->
+
+<!-- /EDITANDO REGISTRO NO JSON -->
 
 <!-- CAPTURANDO DADOS DO FORM E INCLUINDO NO JSON -->
 <?php
@@ -59,33 +80,6 @@ endif;
 //     }
 
 
-
-//     // SE RECEBERMOS O INPUT COM NAME cadastrarUsuario (OU SEJA, SE O USUÁRIO ESTIVER SE CADASTRANDO)
-//     if (isset($_REQUEST["cadastrarUsuario"]) && $_REQUEST["cadastrarUsuario"] === "cadastrarUsuario") {
-
-//         // CRIANDO UM ARRAY COM AS INFORMAÇÕES DO NOVO USUÁRIO
-//         // Podemos inserir as novas variáveis e seus valores em um array
-//         $novoUsuario = [
-//             "nome" => $nome,
-//             "sobrenome" => $sobrenome,
-//             "email" => $email,
-//             "senha" => $senha
-//         ];
-//         // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O ARRAY DO NOVO USUÁRIO
-//         // echo "<br><pre>";
-//         // var_dump($novoUsuario);
-//         // echo "</pre><br>";
-
-
-//         // INCLUINDO NOVO USUÁRIO AO ARRAY DE USUÁRIOS
-//         // E então vamos incluir o array do novo usuário no array de usuários
-//         // ATENÇÃO: lembre-se da estrutura do nosso JSON:
-//         // dentro do JSON temos o índice (a posição) "usuarios"
-//         array_push($usuariosArray["usuarios"], $novoUsuario);
-//         // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O ARRAY ATUALIZADO
-//         // echo "<br><pre>";
-//         // var_dump($usuariosArray);
-//         // echo "</pre><br>";
 
 //     } elseif (isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] === "editarUsuario") {
 //         // OU... SE O USUÁRIO ESTIVER SENDO EDITADO...
