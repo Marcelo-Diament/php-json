@@ -171,9 +171,6 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
         // Criando uma 'variable variable', ou seja, o nome dessa variável será o valor do parâmetro $indice. Então se inserirmos 'usuarios' como índice, a variável se chamará $usuarios. Para usar esse recurso num 'echo' é necessário declarar dentro de chaves: ${$indice}.
         $$indice = getRegisters($indice, $identificador, $arquivo);
 
-        // Partimos do presuposto de que o índice não existe
-        $encontrouIndice = false;
-
         // Verificamos se o índice existe
         $encontrouIndice = array_key_exists($indice, getJson($arquivo));
 
@@ -241,12 +238,58 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
                         // Descrição do erro caso não haja coincidência entre busca e registros
                         $erro = "Índice não localizado";
 
-                        // Atrelando o erro ao $retorno
-                        $retorno = $erro;
+                        // Retornamos erro
+                        return $erro;
+                        die;
 
                     endif;
 
                 endforeach;
+
+            // Se houver idenficiador... ou seja, se estivermos editando um registro...
+            else :
+
+                // Loop percorrendo cada par de chave => valor do $novoRegistro.
+                foreach ($novoRegistro as $key => $value) :
+
+                    // Verificando se há um campo chamado 'senha' no registro (com if short-circuit)
+                    $key === "senha"
+                        // Criptografando a senha
+                        && $novoRegistro[$key] = password_hash($value, PASSWORD_DEFAULT);
+
+                endforeach;
+
+                $jsonTemporario = getJson($arquivo);
+
+                // Percorre cada objeto do índice declarado no parâmetro 1
+                foreach ($jsonTemporario as $indicesNivelUm => $objetos) :
+
+                    // Checa se o $indice coincide com algum dos índices de primeiro nível
+                    if ($indicesNivelUm === $indice) :
+
+                        $indicesNivelUmNovo = [];
+
+                        foreach ($jsonTemporario[$indicesNivelUm] as $objeto) :
+
+                            // Se encontrarmos um email que coincida com o email enviado...
+                            if ($objeto[$identificador[0]] === $identificador[1]) :
+
+                                // Atrelamos os novos dados inseridos ao usuário encontrado (exceto pelo email, que é imutável e pelo ID, que não deve ser alterado - já está correto)
+                                $objeto["nome"] = $novoRegistro["nome"];
+                                $objeto["sobrenome"] = $novoRegistro["sobrenome"];
+                                $objeto["senha"] = $novoRegistro["senha"];
+                            endif;
+                            
+                        array_push($indicesNivelUmNovo, $objeto);
+
+                        endforeach;
+
+                    endif;
+
+
+                endforeach;
+
+                $jsonTemporario[$indice] = $indicesNivelUmNovo;
 
             endif;
 
