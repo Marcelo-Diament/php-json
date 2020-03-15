@@ -123,15 +123,15 @@ endif;
                             <td colspan="2" class="pr-0">
                                 <form id="verUsuario" action="./usuario.php" method="post" class="d-inline">
                                     <input type="hidden" name="ver" value="ver">
-                                    <button type="submit" name="usuarioEmail" value="<?= $usuario["email"] ?>" title="Visulizar dados de <?= $usuario["nome"] ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></button>
+                                    <button type="submit" name="email" value="<?= $usuario["email"] ?>" title="Visulizar dados de <?= $usuario["nome"] ?>" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></button>
                                 </form>
                                 <form id="editarUsuario" action="./usuario.php" method="post" class="d-inline">
                                     <input type="hidden" name="editar" value="editar">
-                                    <button type="submit" name="usuarioEmail" value="<?= $usuario["email"] ?>" title="Editar dados de <?= $usuario["nome"] ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
+                                    <button type="submit" name="email" value="<?= $usuario["email"] ?>" title="Editar dados de <?= $usuario["nome"] ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
                                 </form>
                                 <form id="excluirUsuario" action="./usuarios.php" method="post" class="d-inline">
                                     <input type="hidden" name="excluir" value="excluir">
-                                    <button type="submit" name="usuarioEmail" value="<?= $usuario["email"] ?>" title="Excluir <?= $usuario["nome"] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                    <button type="submit" name="email" value="<?= $usuario["email"] ?>" title="Excluir <?= $usuario["nome"] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

@@ -54,11 +54,9 @@ if (isset($_REQUEST) && $_REQUEST) {
 
     // Atrelamos o valor recebido (no caso sabemos que será um email) à variável $email.
     // Lembrando que o valor recebido veio na própria URL, inserido 'manualmente' na montagem do link.
-    if (isset($_REQUEST["usuarioEmail"]) && $_REQUEST["usuarioEmail"]) {
-        $email = $_REQUEST["usuarioEmail"];
-    } elseif (isset($_REQUEST["email"]) && $_REQUEST["email"]) {
+    if (isset($_REQUEST["email"]) && $_REQUEST["email"]) :
         $email = $_REQUEST["email"];
-    }
+    endif;
 
 
     // Agora vamos percorrer o array de usuários para ver se encontramos o email:
@@ -116,11 +114,11 @@ if (isset($_REQUEST) && $_REQUEST) {
                             <td colspan="2" class="pr-0">
                                 <form id="editarUsuario" action="./usuario.php" method="post" class="d-inline">
                                     <input type="hidden" name="editar" value="editar">
-                                    <button type="submit" name="usuarioEmail" value="<?= $usuarioEncontrado["email"]; ?>" title="Editar dados de <?= $usuarioEncontrado["nome"] ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
+                                    <button type="submit" name="email" value="<?= $usuarioEncontrado["email"]; ?>" title="Editar dados de <?= $usuarioEncontrado["nome"] ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
                                 </form>
                                 <form id="excluirUsuario" action="./usuarios.php" method="post" class="d-inline">
                                     <input type="hidden" name="excluir" value="excluir">
-                                    <button type="submit" name="usuarioEmail" value="<?= $usuarioEncontrado["email"]; ?>" title="Excluir <?= $usuarioEncontrado["nome"] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                    <button type="submit" name="email" value="<?= $usuarioEncontrado["email"]; ?>" title="Excluir <?= $usuarioEncontrado["nome"] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

@@ -17,9 +17,9 @@
         {
             "id": 3,
             "nome": "Fulano",
-            "sobrenome": "de Tal",
+            "sobrenome": "de Tal Tal Tal",
             "email": "fulano@dasilva.com",
-            "senha": "$2y$10$Q0iQI8itGZJ70PJsx8.KPOfFpO1mSJnwzBQwUZGvG9sBA8tFUTbBm"
+            "senha": "$2y$10$QEJdv06VgornUswqhlBcW.\/4v2bkFolkZltO.hP\/LjZ6yRjHx.rDW"
         },
         {
             "id": 4,
@@ -55,6 +55,13 @@
             "sobrenome": "Floriano",
             "email": "joaquim@floriano.com",
             "senha": "$2y$10$n..jpKeCv4TUef\/wwlnytOgbmBT9WYgaR3YlUK8jtoDNOY2LeCVQW"
+        },
+        {
+            "id": 9,
+            "nome": "Ney",
+            "sobrenome": "Mar",
+            "email": "ney@mar",
+            "senha": "$2y$10$Gb5PNRFYhlLghjR2BEBltu96cJ\/viopDv742YgymlMVpYVDTkyooK"
         }
     ]
 }
