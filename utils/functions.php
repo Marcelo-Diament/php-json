@@ -90,7 +90,7 @@ function getRegisters(string $indice, array $identificador = null, string $arqui
         $encontrouIndice = array_key_exists($indice, getJson($arquivo));
 
         // Se não encotnrarmos o índice
-        if ( $encontrouIndice === false ) :
+        if ($encontrouIndice === false) :
 
             // Declaramos o erro
             $erro = "Índice não encontrado";
@@ -104,7 +104,7 @@ function getRegisters(string $indice, array $identificador = null, string $arqui
 
         // $retorno contém todos os objetos dentro do índice definido
         $retorno = getJson($arquivo)[$indice];
-        
+
 
     else :
 
@@ -178,7 +178,7 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
         $encontrouIndice = array_key_exists($indice, getJson($arquivo));
 
         // Se não encotnrarmos o índice
-        if ( $encontrouIndice === false ) :
+        if ($encontrouIndice === false) :
 
             // Declaramos o erro
             $erro = "Índice não encontrado";
@@ -188,16 +188,16 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
 
             die;
 
-        else:
+        else :
 
             // Se não houver identificador
             if ($identificador === null) :
 
                 // ID Máximo Inicial
                 $idMax = 0;
-                
+
                 // Verificando cada um dos registros vindos de $$indice
-                foreach ( $$indice as $registro => $detalhes ) :
+                foreach ($$indice as $registro => $detalhes) :
 
                     // Se a chave for ID e for maior que o $idMax
                     $registro["id"] > $idMax
@@ -210,7 +210,7 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
                 $idNovo = ++$idMax;
 
                 // Agora vamos inserir o $idNovo como primeiro item do novo registro somando o novo array ("id"=>$idNovo) com o array $novoRegistro original.
-                $novoRegistro = array("id"=>$idNovo)+$novoRegistro;
+                $novoRegistro = array("id" => $idNovo) + $novoRegistro;
 
                 // Loop percorrendo cada par de chave => valor do $novoRegistro.
                 foreach ($novoRegistro as $key => $value) :
@@ -267,5 +267,4 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
 
     // Retorna o $retorno
     return $retorno;
-
 };

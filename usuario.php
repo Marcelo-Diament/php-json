@@ -146,21 +146,21 @@ if (isset($_REQUEST) && $_REQUEST) {
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                        <label for="emailCadastrado">email</label>
-                        <input type="email" class="form-control" id="emailCadastrado" name="emailCadastrado" disabled value="<?= $usuarioEncontrado["email"] ?>">
-                        <input type="hidden" class="form-control" id="email" name="email" required value="<?= $usuarioEncontrado["email"] ?>">
+                            <label for="emailCadastrado">email</label>
+                            <input type="email" class="form-control" id="emailCadastrado" name="emailCadastrado" disabled value="<?= $usuarioEncontrado["email"] ?>">
+                            <input type="hidden" class="form-control" id="email" name="email" required value="<?= $usuarioEncontrado["email"] ?>">
                         </div>
                         <div class="form-group col-md-6">
-                        <label for="senha">Senha (preencha a atual ou uma nova - obrigatório)</label>
-                        <input type="password" class="form-control" id="senha" name="senha" required>
+                            <label for="senha">Senha (preencha a atual ou uma nova - obrigatório)</label>
+                            <input type="password" class="form-control" id="senha" name="senha" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck" checked>
-                        <label class="form-check-label" for="gridCheck">
-                            Concordo com os termos
-                        </label>
+                            <input class="form-check-input" type="checkbox" id="gridCheck" checked>
+                            <label class="form-check-label" for="gridCheck">
+                                Concordo com os termos
+                            </label>
                         </div>
                     </div>
                     <input type="hidden" name="editarUsuario" value="editarUsuario">

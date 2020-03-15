@@ -61,7 +61,6 @@ if (isset($_REQUEST) && $_REQUEST) {
         // Aqui, nesse caso, recebemos nesse formato - nessa página - recebemos para excluir o user
 
         $email = $_REQUEST["usuarioEmail"];
-
     } elseif (isset($_REQUEST["email"]) && $_REQUEST["email"]) {
         // Se recebermo os names no formato campo
 
@@ -74,7 +73,7 @@ if (isset($_REQUEST) && $_REQUEST) {
 
     }
 
-    
+
 
     // SE RECEBERMOS O INPUT COM NAME cadastrarUsuario (OU SEJA, SE O USUÁRIO ESTIVER SE CADASTRANDO)
     if (isset($_REQUEST["cadastrarUsuario"]) && $_REQUEST["cadastrarUsuario"] === "cadastrarUsuario") {
@@ -104,54 +103,49 @@ if (isset($_REQUEST) && $_REQUEST) {
         // echo "</pre><br>";
 
     } elseif (isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] === "editarUsuario") {
-    // OU... SE O USUÁRIO ESTIVER SENDO EDITADO...
+        // OU... SE O USUÁRIO ESTIVER SENDO EDITADO...
 
         // Vamos percorrer o array de usuários para ver se encontramos o email
         // Estamos usando um FOR para termos o índice de cada usuário
-        for($i = 0; $i < count($usuariosArray["usuarios"]); $i++) {
-    
+        for ($i = 0; $i < count($usuariosArray["usuarios"]); $i++) {
+
             // Se encontrarmos um email que coincida com o email enviado...
             if ($usuariosArray["usuarios"][$i]["email"] === $email) {
-    
+
                 // Atrelamos os novos dados inseridos ao usuário encontrado
                 $usuariosArray["usuarios"][$i]["nome"] = $nome;
                 $usuariosArray["usuarios"][$i]["sobrenome"] = $sobrenome;
                 $usuariosArray["usuarios"][$i]["senha"] = $senha;
-    
             } else {
 
                 // Se não encontrarmos...
-    
+
                 // Salvamos a variável $erro com o motivo do erro
                 $erro = "Usuário não encontrado!";
             }
         }
-
-    }  elseif (isset($_REQUEST["excluir"]) && $_REQUEST["excluir"] === "excluir") {
+    } elseif (isset($_REQUEST["excluir"]) && $_REQUEST["excluir"] === "excluir") {
         // OU... SE O USUÁRIO ESTIVER SENDO EXCLUÍDO...
-    
+
         // Vamos percorrer o array de usuários para ver se encontramos o email
         // Estamos usando um FOR para termos o índice de cada usuário
-        for($i = 0; $i < count($usuariosArray["usuarios"]); $i++) {
-    
+        for ($i = 0; $i < count($usuariosArray["usuarios"]); $i++) {
+
             // Se encontrarmos um email que coincida com o email enviado...
             if ($usuariosArray["usuarios"][$i]["email"] === $email) {
-    
+
                 // Excluímos o índice em que houve a coincidência com a função unset
                 // O parâmetro um é o array e o segundo é o índice onde a função começará a remover os índices
                 // Pode haver um terceiro parâmetro, que define quantos índices serão removidos
-                array_splice($usuariosArray["usuarios"],$i,1);
-    
+                array_splice($usuariosArray["usuarios"], $i, 1);
             } else {
 
                 // Se não encontrarmos...
-    
+
                 // Salvamos a variável $erro com o motivo do erro
                 $erro = "Usuário não encontrado!";
             }
-            
         }
-
     }
 
     // CODIFICANDO NOSSO ARRAY NOVAMENTE
@@ -190,24 +184,19 @@ if (isset($_REQUEST) && $_REQUEST) {
         // REDIRECIONANDO O USUÁRIO PARA A LISTA DE USUÁRIOS
         header('Location: ./usuarios.php');
         exit;
-    
-    }  elseif (isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] === "editarUsuario") {
-    // /SE O USUÁRIO ESTIVER SENDO EDITADO...
+    } elseif (isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] === "editarUsuario") {
+        // /SE O USUÁRIO ESTIVER SENDO EDITADO...
 
         // RECARREGAMOS A PÁGINA PARA ATUALIZAR A LISTA DE USUÁRIOS (posteriormente aprenderemos a fazer isso com AJAX sem sair da página)
         header('Location: ./usuarios.php');
         exit;
-    
-    }  elseif (isset($_REQUEST["excluir"]) && $_REQUEST["excluir"] === "excluir") {
+    } elseif (isset($_REQUEST["excluir"]) && $_REQUEST["excluir"] === "excluir") {
         // /SE O USUÁRIO ESTIVER SENDO EXCLUÍDO...
-    
-            // RECARREGAMOS A PÁGINA PARA ATUALIZAR A LISTA DE USUÁRIOS (posteriormente aprenderemos a fazer isso com AJAX sem sair da página)
-            header('Location: ./usuarios.php');
-            exit;
-        
-        }
-    
 
+        // RECARREGAMOS A PÁGINA PARA ATUALIZAR A LISTA DE USUÁRIOS (posteriormente aprenderemos a fazer isso com AJAX sem sair da página)
+        header('Location: ./usuarios.php');
+        exit;
+    }
 }
 
 

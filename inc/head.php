@@ -1,7 +1,7 @@
 <!-- PRESETS -->
 <?php
-    require_once('./utils/functions.php');
-    init( );
+require_once('./utils/functions.php');
+init();
 ?>
 <!-- /PRESETS -->
 <!DOCTYPE html>
