@@ -279,8 +279,8 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
                                 $objeto["sobrenome"] = $novoRegistro["sobrenome"];
                                 $objeto["senha"] = $novoRegistro["senha"];
                             endif;
-                            
-                        array_push($indicesNivelUmNovo, $objeto);
+
+                            array_push($indicesNivelUmNovo, $objeto);
 
                         endforeach;
 
@@ -298,7 +298,7 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
         // Transforma o array em JSON
         $jsonAtualizado = json_encode($jsonTemporario);
 
-        // Captura conteúdo do arquivo declarado no parâmetro 1
+        // Redefine o conteúdo do JSON
         $conteudoAtualizado = file_put_contents($arquivo, $jsonAtualizado);
 
         // Condicional if no estilo short-circuit, onde o && determina a ação no caso da condição ser verdadeira e o || caso a condição seja falsa
@@ -311,3 +311,112 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
     // Retorna o $retorno
     return $retorno;
 };
+
+/**
+ * Exclui registro do JSON
+ * 
+ * @param string $indice -> Índice de primeiro nível onde o registro deve ser inserido (ex.: usuarios)
+ *  
+ * @param array $identificador -> Array contendo a propriedade do registro a ser verificada e o valor a ser utilizado como parâmetro de busca.
+ * 
+ * @param string $arquivo (opcional) -> Arquivo no qual está salvo o JSON que deve ser consultado. Caso não seja declarado um valor, consultará o arquivo ./data/dados.json.
+ * 
+ * @return boolean Retorna true caso o objeto seja excluído e false caso não.
+ * 
+ * Obs.: deve ser chamada na página para excluir o objeto e retornar true ou false.
+ * 
+ */
+function unsetRegister(string $indice, array $identificador, string $arquivo = "./data/dados.json")
+{
+
+    // Criando uma 'variable variable', ou seja, o nome dessa variável será o valor do parâmetro $indice. Então se inserirmos 'usuarios' como índice, a variável se chamará $usuarios. Para usar esse recurso num 'echo' é necessário declarar dentro de chaves: ${$indice}.
+    $$indice = getRegisters($indice, $identificador, $arquivo);
+
+    // Verificamos se o índice existe
+    $encontrouIndice = array_key_exists($indice, getJson($arquivo));
+
+    // Se não encotnrarmos o índice
+    if ($encontrouIndice === false) :
+
+        // Declaramos o erro
+        $erro = "Índice não encontrado";
+
+        // E retornamos o erro
+        return $erro;
+
+        die;
+
+    else :
+
+        // Se encontrarmos o índice, chamamos o conteúdo JSON
+        $jsonTemporario = getJson($arquivo);
+
+        // Percorre cada objeto do índice declarado no parâmetro 1
+        foreach ($jsonTemporario as $indicesNivelUm => $objetos) :
+
+            // Checa se o $indice coincide com algum dos índices de primeiro nível
+            if ($indicesNivelUm === $indice) :
+
+                // Se sim, criamos um novo array vazio
+                $indicesNivelUmNovo = [];
+
+                // E para cada objeto do array temporário criado
+                foreach ($jsonTemporario[$indicesNivelUm] as $objeto) :
+
+                    // Partimos do presuposto que não encontraremos o usuário
+                    $usuarioExistente = false;
+
+                    // Se o identificador do objeto não coincidier com o identificador enviado...
+                    if ($objeto[$identificador[0]] === $identificador[1]) :
+                    
+                        // O usuário a ser excluído existe
+                        $usuarioExistente = true;
+
+                    else :
+
+                        // Incluímos o objeto no novo array
+                        array_push($indicesNivelUmNovo, $objeto);
+
+                    endif;
+
+                endforeach;
+
+                // Se o usuário a ser excluído não existir
+                if ( $usuarioExistente === false ):
+
+                    // Geramos um erro
+                    $erro = "Usuário não encontrado";
+
+                    // E o retornamos
+                    return $erro;
+
+                    // E paramos de rodar a função
+                    die;
+
+                endif;
+
+            endif;
+
+        endforeach;
+
+        // Redefinimos o array do índice declarado
+        $jsonTemporario[$indice] = $indicesNivelUmNovo;
+
+    endif;
+
+
+// Transforma o array em JSON
+$jsonAtualizado = json_encode($jsonTemporario);
+
+// Insere o conteúdo atualizado
+$conteudoAtualizado = file_put_contents($arquivo, $jsonAtualizado);
+
+// Condicional if no estilo short-circuit, onde o && determina a ação no caso da condição ser verdadeira e o || caso a condição seja falsa
+$conteudoAtualizado
+    && $retorno = true
+    || $retorno = false;
+
+
+// Retorna o $retorno
+return $retorno;
+}
