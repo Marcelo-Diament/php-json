@@ -58,44 +58,6 @@ endif;
 ?>
 <!-- /EXCLUINDO REGISTRO NO JSON -->
 
-<!-- CAPTURANDO DADOS DO FORM E INCLUINDO NO JSON -->
-<?php
-
-// // RECEBENDO DADOS DO FORMULÁRIO
-// // Se estivermos recebendo dados (como usamos o $_REQUEST, pode ser POST ou GET)
-// if (isset($_REQUEST) && $_REQUEST) {
-
-//     // DESCOMENTE AS 3 LINHAS ABAIXO PARA VER O $_REQUEST RECEBIDO
-//     // echo "<br><pre>";
-//     // var_dump($_REQUEST);
-//     // echo "</pre><br>";
-
-//     // Atrelamos os valores recebidos às variáveis que estamos criando mais abaixo.
-//     // Lembrando que o valor do input é capturado através do valor do atributo name do input.
-//     // Ou seja, se recebemos valor em $_REQUEST["nome"], é por que o input tem o atributo name="nome".
-
-//     if (isset($_REQUEST["usuarioEmail"]) && $_REQUEST["usuarioEmail"]) {
-//         // Se recebermos os names no formato usuarioCampo...
-//         // Aqui, nesse caso, recebemos nesse formato - nessa página - recebemos para excluir o user
-
-//         $email = $_REQUEST["usuarioEmail"];
-//     } elseif (isset($_REQUEST["email"]) && $_REQUEST["email"]) {
-//         // Se recebermo os names no formato campo
-
-//         $nome = $_REQUEST["nome"];
-//         $sobrenome = $_REQUEST["sobrenome"];
-//         $email = $_REQUEST["email"];
-//         // Para a senha, utilizaremos a função password_hash, de modo que não seja possível ver a senha do usuário:
-//         $senha = password_hash($_REQUEST["senha"], PASSWORD_DEFAULT);
-//         // Para saber mais sobre essa função de 'hashear' a senha, acesse https://www.php.net/manual/en/function.password-hash.php.
-
-//     }
-
-
-?>
-<!-- /CAPTURANDO DADOS DO FORM E INCLUINDO NO JSON -->
-
-
 <main class="container">
     <article class="row">
         <section class="col-12 mx-auto bg-light my-5 py-5 rounded border" id="usuariosTb">
@@ -130,7 +92,7 @@ endif;
                                     <button type="submit" name="email" value="<?= $usuario["email"] ?>" title="Editar dados de <?= $usuario["nome"] ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
                                 </form>
                                 <form id="excluirUsuario" action="./usuarios.php" method="post" class="d-inline">
-                                    <input type="hidden" name="excluir" value="excluir">
+                                    <input type="hidden" name="excluirUsuario" value="excluirUsuario">
                                     <button type="submit" name="email" value="<?= $usuario["email"] ?>" title="Excluir <?= $usuario["nome"] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>

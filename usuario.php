@@ -1,6 +1,26 @@
 <?php $tituloPagina = "Detalhes do Usuário"; ?>
 <?php require_once("./inc/head.php"); ?>
 <?php require_once("./inc/header.php"); ?>
+<!-- EDITANDO REGISTRO NO JSON -->
+<?php
+if ( isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] ) :
+
+    $arrayNovoUsuario = [
+        "nome" => $_REQUEST["nome"],
+        "sobrenome" => $_REQUEST["sobrenome"],
+        "email" => $_REQUEST["email"],
+        "senha" => $_REQUEST["senha"]
+    ];
+
+    $identificador = ["email", $_REQUEST["email"]];
+
+    setRegister("usuarios", $arrayNovoUsuario, $identificador);
+
+    header("Location: usuarios.php");
+
+endif;
+?>
+<!-- /EDITANDO REGISTRO NO JSON -->
 
 <!-- CAPTURANDO DADOS DO JSON -->
 <?php
@@ -117,7 +137,7 @@ if (isset($_REQUEST) && $_REQUEST) {
                                     <button type="submit" name="email" value="<?= $usuarioEncontrado["email"]; ?>" title="Editar dados de <?= $usuarioEncontrado["nome"] ?>" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></button>
                                 </form>
                                 <form id="excluirUsuario" action="./usuarios.php" method="post" class="d-inline">
-                                    <input type="hidden" name="excluir" value="excluir">
+                                    <input type="hidden" name="excluirUsuario" value="excluirUsuario">
                                     <button type="submit" name="email" value="<?= $usuarioEncontrado["email"]; ?>" title="Excluir <?= $usuarioEncontrado["nome"] ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
