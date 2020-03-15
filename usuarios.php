@@ -24,6 +24,7 @@ if ( isset($_REQUEST["cadastrarUsuario"]) && $_REQUEST["cadastrarUsuario"] ) :
 endif;
 ?>
 <!-- /INCLUINDO REGISTRO NO JSON -->
+<!-- EDITANDO REGISTRO NO JSON -->
 <?php
 if ( isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] ) :
 
@@ -42,9 +43,20 @@ if ( isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] ) :
 
 endif;
 ?>
-<!-- EDITANDO REGISTRO NO JSON -->
-
 <!-- /EDITANDO REGISTRO NO JSON -->
+<!-- EXCLUINDO REGISTRO NO JSON -->
+<?php
+if ( isset($_REQUEST["excluirUsuario"]) && $_REQUEST["excluirUsuario"] ) :
+
+    $identificador = ["email", $_REQUEST["email"]];
+
+    unsetRegister("usuarios", $identificador);
+
+    header("Location: usuarios.php");
+
+endif;
+?>
+<!-- /EXCLUINDO REGISTRO NO JSON -->
 
 <!-- CAPTURANDO DADOS DO FORM E INCLUINDO NO JSON -->
 <?php
@@ -79,30 +91,6 @@ endif;
 
 //     }
 
-
-
-//     } elseif (isset($_REQUEST["editarUsuario"]) && $_REQUEST["editarUsuario"] === "editarUsuario") {
-//         // OU... SE O USUÁRIO ESTIVER SENDO EDITADO...
-
-//         // Vamos percorrer o array de usuários para ver se encontramos o email
-//         // Estamos usando um FOR para termos o índice de cada usuário
-//         for ($i = 0; $i < count($usuariosArray["usuarios"]); $i++) {
-
-//             // Se encontrarmos um email que coincida com o email enviado...
-//             if ($usuariosArray["usuarios"][$i]["email"] === $email) {
-
-//                 // Atrelamos os novos dados inseridos ao usuário encontrado
-//                 $usuariosArray["usuarios"][$i]["nome"] = $nome;
-//                 $usuariosArray["usuarios"][$i]["sobrenome"] = $sobrenome;
-//                 $usuariosArray["usuarios"][$i]["senha"] = $senha;
-//             } else {
-
-//                 // Se não encontrarmos...
-
-//                 // Salvamos a variável $erro com o motivo do erro
-//                 $erro = "Usuário não encontrado!";
-//             }
-//         }
 //     } elseif (isset($_REQUEST["excluir"]) && $_REQUEST["excluir"] === "excluir") {
 //         // OU... SE O USUÁRIO ESTIVER SENDO EXCLUÍDO...
 
@@ -190,6 +178,7 @@ endif;
             <table class="table mt-5 mb-2 text-center bg-white">
                 <thead class="thead-dark">
                     <tr>
+                        <th scope="col">#</th>
                         <th scope="col" colspan="2">Nome Completo</th>
                         <th scope="col">email</th>
                         <th scope="col">Senha</th>
@@ -200,6 +189,7 @@ endif;
                     <!-- CAPTURANDO REGISTROS DO JSON A PARTIR DA FUNÇÃO getRegisters(), CHAMADA NA VARIÁVEL $listaDeUsuarios NA LINHA 6 DESSE DOCUMENTO -->
                     <?php foreach ($listaDeUsuarios as $usuario) : ?>
                         <tr>
+                            <th scope="row" class="text-left pl-4"><?= $usuario["id"]; ?></th>
                             <th scope="row" colspan="2" class="text-left pl-4"><?= $usuario["nome"] . " " . $usuario["sobrenome"]; ?></th>
                             <td class="text-left"><a href="mailto:<?= $usuario["email"]; ?>?subject=Contato%20via%20Site%20PHP%20JSON" title="Enviar email para <?= $usuario["nome"] ?>"><?= $usuario["email"]; ?></a></td>
                             <!-- A função abaixo mantém apenas 10 caracteres

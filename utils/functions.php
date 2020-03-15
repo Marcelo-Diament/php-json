@@ -329,9 +329,6 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
 function unsetRegister(string $indice, array $identificador, string $arquivo = "./data/dados.json")
 {
 
-    // Criando uma 'variable variable', ou seja, o nome dessa variável será o valor do parâmetro $indice. Então se inserirmos 'usuarios' como índice, a variável se chamará $usuarios. Para usar esse recurso num 'echo' é necessário declarar dentro de chaves: ${$indice}.
-    $$indice = getRegisters($indice, $identificador, $arquivo);
-
     // Verificamos se o índice existe
     $encontrouIndice = array_key_exists($indice, getJson($arquivo));
 
@@ -344,79 +341,66 @@ function unsetRegister(string $indice, array $identificador, string $arquivo = "
         // E retornamos o erro
         return $erro;
 
-        die;
-
     else :
 
-        // Se encontrarmos o índice, chamamos o conteúdo JSON
-        $jsonTemporario = getJson($arquivo);
+        // Criando uma 'variable variable', ou seja, o nome dessa variável será o valor do parâmetro $indice. Então se inserirmos 'usuarios' como índice, a variável se chamará $usuarios. Para usar esse recurso num 'echo' é necessário declarar dentro de chaves: ${$indice}.
+        $$indice = getRegisters($indice, null, $arquivo);
 
-        // Percorre cada objeto do índice declarado no parâmetro 1
-        foreach ($jsonTemporario as $indicesNivelUm => $objetos) :
+        // Criando um array temporário para receber os objetos que permanecem
+        $arrayTemporario = [];
+        $usuarioExiste = false;
 
-            // Checa se o $indice coincide com algum dos índices de primeiro nível
-            if ($indicesNivelUm === $indice) :
+        for ( $i = 0; $i < count($$indice); $i++ ) :
 
-                // Se sim, criamos um novo array vazio
-                $indicesNivelUmNovo = [];
+            // Se o identificador não corresponder com o identificador enviado...
+            if ($$indice[$i][$identificador[0]] != $identificador[1]) :
 
-                // E para cada objeto do array temporário criado
-                foreach ($jsonTemporario[$indicesNivelUm] as $objeto) :
+                // Incluindo os objetos que devem permanecer
+                array_push($arrayTemporario, $$indice[$i]);
 
-                    // Partimos do presuposto que não encontraremos o usuário
-                    $usuarioExistente = false;
+            else :
 
-                    // Se o identificador do objeto não coincidier com o identificador enviado...
-                    if ($objeto[$identificador[0]] === $identificador[1]) :
-                    
-                        // O usuário a ser excluído existe
-                        $usuarioExistente = true;
-
-                    else :
-
-                        // Incluímos o objeto no novo array
-                        array_push($indicesNivelUmNovo, $objeto);
-
-                    endif;
-
-                endforeach;
-
-                // Se o usuário a ser excluído não existir
-                if ( $usuarioExistente === false ):
-
-                    // Geramos um erro
-                    $erro = "Usuário não encontrado";
-
-                    // E o retornamos
-                    return $erro;
-
-                    // E paramos de rodar a função
-                    die;
-
-                endif;
+                // Verificando se houve alguma correspondência entre o identificador e as propriedades dos objetos
+                $usuarioExiste = true;
 
             endif;
 
-        endforeach;
+        endfor;
 
-        // Redefinimos o array do índice declarado
-        $jsonTemporario[$indice] = $indicesNivelUmNovo;
+        // Se não houver nenhuma correspondência,
+        if ( $usuarioExiste === false ) :
+
+            // Definimos um erro
+            $erro = "Usuário não existe";
+
+            // Retornamos o erro
+            return $erro;
+
+            // E travamos a função
+            die;
+            
+        endif;
 
     endif;
 
+    // Capturando o JSON completo
+    $jsonTemporario = getJson($arquivo);
 
-// Transforma o array em JSON
-$jsonAtualizado = json_encode($jsonTemporario);
+    // Atualizando o $indice do JSON temporário
+    $jsonTemporario[$indice] = $arrayTemporario;
 
-// Insere o conteúdo atualizado
-$conteudoAtualizado = file_put_contents($arquivo, $jsonAtualizado);
+    // Transforma o array em JSON
+    $jsonAtualizado = json_encode($jsonTemporario);
 
-// Condicional if no estilo short-circuit, onde o && determina a ação no caso da condição ser verdadeira e o || caso a condição seja falsa
-$conteudoAtualizado
-    && $retorno = true
-    || $retorno = false;
+    // Insere o conteúdo atualizado
+    $conteudoAtualizado = file_put_contents($arquivo, $jsonAtualizado);
+
+    // Condicional if no estilo short-circuit, onde o && determina a ação no caso da condição ser verdadeira e o || caso a condição seja falsa
+    $conteudoAtualizado
+        && $retorno = true
+        || $retorno = false;
 
 
-// Retorna o $retorno
-return $retorno;
+    // Retorna o $retorno
+    return $retorno;
 }

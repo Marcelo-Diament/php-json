@@ -123,10 +123,10 @@
         <section class="col-12 mx-auto bg-light my-5 px-5 pt-5 rounded border">
             <h2 class="col-12 text-info text-center mb-5">unsetRegister( )</h2>
             <article class="px-0 mx-0">
-                <h3>unsetRegister( "usuarios", ["email","marcelo@diament.com"] )</h3>
+                <h3>unsetRegister( "usuarios", ["email","sergio@malandro.com"] )</h3>
                 <p><b>Função unsetRegister( ) recebe o parâmetro 1, que indica em qual índice primário do array deve ser feita a consulta, e o parâmetro 2, que indica qual o identificador e seu valor para podermos excluir o elemento desejado.</b></p>
                 <?php
-                // $usuarioExcluido = unsetRegister("usuarios", ["email","marcelo@diament.com"] );
+                // $usuarioExcluido = unsetRegister("usuarios", ["email","sergio@malandro.com"] );
                 echo "<br/><pre class='bg-dark text-warning rounded px-3 py-4 mb-5'>";
                 // var_dump($usuarioExcluido);
                 echo "Se rodarmos a função excluiremos esse usuário (caso exista).<br>Para ver a função em ação, acesse o arquivo guia.php<br>e descomente a chamada da função e o respectivo 'var_dump()'.";
