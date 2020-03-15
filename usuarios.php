@@ -171,7 +171,7 @@ if (isset($_REQUEST) && $_REQUEST) {
 
 
     // SE O USUÁRIO ESTIVER SE CADASTRANDO...
-    if (isset($_REQUEST["cadastrarUsuario"]) && $_REQUEST["cadastrarUsuario"] === "true") {
+    if (isset($_REQUEST["cadastrarUsuario"]) && $_REQUEST["cadastrarUsuario"] === "cadastrarUsuario") {
 
         // Vamos aproveitar e já 'logar' nosso usuário
         // Atenção: isso não é uma boa prática por não ser muito seguro,
