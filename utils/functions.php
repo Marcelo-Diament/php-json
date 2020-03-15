@@ -154,6 +154,25 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
         // Se não houver identificador
         if ($identificador === null) :
 
+            // ID Máximo Inicial
+            $idMax = 0;
+            
+            // Verificando cada um dos registros vindos de $$indice
+            foreach ( $$indice as $registro ) :
+
+                // Se a chave for ID e for maior que o $idMax
+                $registro["id"] > $idMax
+                    // Atribuímos o valor ao $idMax (if do tipo short-circuit) - ou seja, pegamos o maior ID existente no array de objetos, independente da ordem em que aparece
+                    && $idMax = $registro["id"];
+
+            endforeach;
+
+            // Definimos o novo ID sendo uma unidade maior que o maior ID encontrado em $$indice
+            $idNovo = ++$idMax;
+
+            // Agora vamos inserir o $idNovo como primeiro item do novo registro somando o novo array ("id"=>$idNovo) com o array $novoRegistro original.
+            $novoRegistro = array("id"=>$idNovo)+$novoRegistro;
+
             // Loop percorrendo cada par de chave => valor do $novoRegistro.
             foreach ($novoRegistro as $key => $value) :
 
@@ -162,10 +181,6 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
                     && $novoRegistro[$key] = password_hash($value, PASSWORD_DEFAULT);
 
             endforeach;
-
-            // $novoRegistroObj = (object) $novoRegistro;
-            // var_dump(($novoRegistroObj));
-            // exit;
 
             // Adição do objeto ao $$indice
             array_push($$indice, $novoRegistro);
@@ -181,13 +196,13 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
                     // Atualiza o índice de acordo com o novo índice
                     $jsonTemporario[$indicesNivelUm] = $$indice;
 
-                // else :
+                else :
 
-                //     // Descrição do erro caso não haja coincidência entre busca e registros
-                //     $erro = "Registro não localizado";
+                    // Descrição do erro caso não haja coincidência entre busca e registros
+                    $erro = "Registro não localizado";
 
-                //     // Atrelando o erro ao $retorno
-                //     $retorno = $erro;
+                    // Atrelando o erro ao $retorno
+                    $retorno = $erro;
 
                 endif;
 
@@ -197,8 +212,6 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
 
         // Transforma o array em JSON
         $jsonAtualizado = json_encode($jsonTemporario);
-        // var_dump($jsonAtualizado);
-        // exit;
 
         // Captura conteúdo do arquivo declarado no parâmetro 1
         $conteudoAtualizado = file_put_contents($arquivo, $jsonAtualizado);
@@ -212,4 +225,5 @@ function setRegister(string $indice, array $novoRegistro, array $identificador =
 
     // Retorna o $retorno
     return $retorno;
+    
 };

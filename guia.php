@@ -2,7 +2,7 @@
 <?php require_once("./inc/head.php"); ?>
 <?php require_once("./inc/header.php"); ?>
 
-<?php //setRegister( "usuarios", ["nome"=>"Joselito","sobrenome"=>"Joselito", "email"=>"jose@lito.com", "senha"=> "123abc"] ); ?>
+<?php setRegister( "usuarios", ["nome"=>"Joselito2","sobrenome"=>"Joselito", "email"=>"jose@litos.com", "senha"=> "123abc"] ); ?>
 
 <main class="container">
     <article class="row">
