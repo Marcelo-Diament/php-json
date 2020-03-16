@@ -1,6 +1,6 @@
 <!-- PRESETS -->
 <?php
-require_once('./utils/functions.php');
+require('./utils/functions.php');
 init();
 ?>
 <!-- /PRESETS -->

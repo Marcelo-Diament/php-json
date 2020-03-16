@@ -105,7 +105,6 @@ function getRegisters(string $indice, array $identificador = null, string $arqui
         // $retorno contém todos os objetos dentro do índice definido
         $retorno = getJson($arquivo)[$indice];
 
-
     else :
 
         // Percorre cada objeto do índice declarado no parâmetro 2
@@ -136,6 +135,7 @@ function getRegisters(string $indice, array $identificador = null, string $arqui
 
     // Retorna o $retorno
     return $retorno;
+
 };
 
 /**

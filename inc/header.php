@@ -31,7 +31,7 @@
                     <?php
 
                     // Verificando se há sessão e se temos o usuário logado:
-                    if (isset($_SESSION["usuarioLogado"]) && $_SESSION["usuarioLogado"] === true) {
+                    if (isset($_SESSION["usuarioLogado"]) && $_SESSION["usuarioLogado"] === true) :
 
                     ?>
                         <!-- Menu exibido para usuários logados -->
@@ -40,14 +40,14 @@
                                 <i class="fa fa-user"></i> <?= $_SESSION["usuarioNome"] ?> | Editar Perfil
                             </a>
                             <div class="dropdown-menu" aria-labelledby="menuUsuario">
-                                <a class="dropdown-item" disabled href="#" tabindex="-1" aria-disabled="true">Editar Perfil</a>
+                                <a class="dropdown-item" disabled href="./perfil.php" tabindex="-1" aria-disabled="true">Editar Perfil</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="./logout.php">Logout</a>
                             </div>
                         </li>
                         <!-- /Menu exibido para usuários logados -->
 
-                    <?php } else { ?>
+                    <?php else : ?>
 
                         <!-- Menu exibido para usuários não logados -->
                         <li class="nav-item">
@@ -58,7 +58,7 @@
                         </li>
                         <!-- /Menu exibido para usuários não logados -->
 
-                    <?php } ?>
+                    <?php endif; ?>
                 </ul>
             </div>
         </nav>
