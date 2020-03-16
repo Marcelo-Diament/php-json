@@ -42,7 +42,7 @@
                             <div class="dropdown-menu" aria-labelledby="menuUsuario">
                                 <a class="dropdown-item" disabled href="./perfil.php" tabindex="-1" aria-disabled="true">Editar Perfil</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="./logout.php">Logout</a>
+                                <a class="dropdown-item" href="./utils/logout.php">Logout</a>
                             </div>
                         </li>
                         <!-- /Menu exibido para usuários logados -->
