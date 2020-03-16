@@ -1,1 +1,25 @@
-{"usuarios":[{"id":1,"nome":"Professor Marcelo","sobrenome":"Diament","email":"marcelo@diament.com","senha":"$2y$10$xCzIitDuCTu0yNhAcHzj3uzAhp9l81sFOE4mQ\/Z0qz0BxiZ0jbOXK"},{"id":2,"nome":"Professor Victor","sobrenome":"Torres","email":"victor@torres.com.br","senha":"$2y$10$Ma1jlHlDFyrzgiWMbPuQ3.OAv8tVYlk6khM4lC\/sWAUNE5OysEYVm"},{"id":7,"nome":"Robert","sobrenome":"Nesta Marley","email":"robert@nesta.com","senha":"$2y$10$AZxKCkFk9shRGlgA387PY.QE\/9WzrpxUgiDMfog1jUTbdBJUzEtt."}]}
+{
+    "usuarios": [
+        {
+            "id": 1,
+            "nome": "Professor Marcelo",
+            "sobrenome": "Diament",
+            "email": "marcelo@diament.com",
+            "senha": "$2y$10$xCzIitDuCTu0yNhAcHzj3uzAhp9l81sFOE4mQ\/Z0qz0BxiZ0jbOXK"
+        },
+        {
+            "id": 2,
+            "nome": "Professor Victor",
+            "sobrenome": "Torres",
+            "email": "victor@torres.com.br",
+            "senha": "$2y$10$Ma1jlHlDFyrzgiWMbPuQ3.OAv8tVYlk6khM4lC\/sWAUNE5OysEYVm"
+        },
+        {
+            "id": 7,
+            "nome": "Bob",
+            "sobrenome": "Nesta Marley",
+            "email": "robert@nesta.com",
+            "senha": "$2y$10$CrCsCy0cyKuyDggofn9ihuyS7tpSq5yJ.c9DCFjH5Tz2x31gM.MRK"
+        }
+    ]
+}
